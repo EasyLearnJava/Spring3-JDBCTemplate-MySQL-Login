@@ -11,11 +11,11 @@ import com.easylearnjava.exception.ServiceException;
 public class LoginService {
 
 	@Autowired
-	LoginDao loginDao;
+	LoginDao loginDaos;
 	
 	public boolean isValidPassword(String userName, String password) {
 		try {
-			String pwdFromDB = loginDao.getUserPassword(userName);
+			String pwdFromDB = loginDaos.getUserPassword(userName);
 
 			if (null != pwdFromDB) {
 				if (pwdFromDB.equals(password)) {

@@ -15,7 +15,7 @@
 			<td><a href="login"> Log Out ...</a></td>
 		</tr>
 		<tr>
-			<td>Welcome <b><core:out value="${loginForm.userName}" /></b> you have successfully
+			<td>Welcome <b><core:out value="${modelObjForm.userName}" /></b> you have successfully
 				logged in to the application ... :)
 			</td>
 		</tr>

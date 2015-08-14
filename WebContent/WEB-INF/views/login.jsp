@@ -30,7 +30,7 @@
 	<h2 align="center">Login functionality implemented using Spring 3,
 		JDBCTemplate and MySQL</h2>
 
-	<form:form action="login" commandName="loginForm" method="post">
+	<form:form action="login" commandName="modelObjForm" method="post">
 		<table align="center">
 			<tr>
 				<td colspan="2"><FONT color="red"><form:errors	path="userName" /></FONT></td>

@@ -19,9 +19,6 @@
 	<context:component-scan
 		base-package="*" />
 
-	<!-- Data base configurations are configured in the below file -->
- 	<import resource="spring-jdbc.xml" />
-
 	<!-- View resolver for redirecting to appropriate view that must be displayed to the user -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

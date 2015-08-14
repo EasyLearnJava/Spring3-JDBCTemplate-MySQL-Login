@@ -1,41 +1,63 @@
 package com.easylearnjava.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.easylearnjava.model.LoginForm;
 import com.easylearnjava.service.LoginService;
 
 @Controller
-@RequestMapping(value={"/loginpage", "/login"})
 public class LoginController {
 
 	@Autowired
 	LoginService loginService;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	//method called from index.jsp page.
+	@RequestMapping(value="/loginpage", method = RequestMethod.GET)
 	public String bindForm(Model model) {
-		model.addAttribute("loginForm", new LoginForm());
+		model.addAttribute("modelObjForm", new LoginForm());
 		return "login";
+	}
+	
+	//called when log out button is clicked
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	public ModelAndView bindModelView() {
+		ModelAndView modelView = new ModelAndView("login");
+		modelView.addObject("modelObjForm", new LoginForm());
+		return modelView;
 	}
 
 	// Hibernate Validator is the reference implementation for JSR 303
-	@RequestMapping(method = RequestMethod.POST)
-	public String processForm(@Valid LoginForm loginForm, BindingResult result,
+	@RequestMapping(value="/login", method = RequestMethod.POST)
+	public String processForm(@Valid @ModelAttribute("modelObjForm") LoginForm form, BindingResult result,
 			Model model) {
 
 		try {
+			
+			/*Map<String, Object> modelObjMap = model.asMap();
+			LoginForm myForm = null;
+			for(Map.Entry<String, Object> entry : modelObjMap.entrySet()){
+				if(entry.getValue() instanceof LoginForm){
+					myForm = (LoginForm)entry.getValue();
+					break;
+				}
+			}*/
+			
 			if (result.hasErrors()) {
 				return "login";
 			}
-
-			boolean isValid = loginService.isValidPassword(loginForm.getUserName(), loginForm.getPassword());
+			
+			boolean isValid = loginService.isValidPassword(form.getUserName(), form.getPassword());
 
 			if (isValid) {
 				return "loginSuccess";
@@ -48,6 +70,6 @@ public class LoginController {
 			result.rejectValue("userName", "global.exception.message");
 			return "login";
 		}
-	}
+	}		
 
 }
