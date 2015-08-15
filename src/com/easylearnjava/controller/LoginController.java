@@ -1,7 +1,5 @@
 package com.easylearnjava.controller;
 
-import java.util.Map;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +41,6 @@ public class LoginController {
 			Model model) {
 
 		try {
-			
-			/*Map<String, Object> modelObjMap = model.asMap();
-			LoginForm myForm = null;
-			for(Map.Entry<String, Object> entry : modelObjMap.entrySet()){
-				if(entry.getValue() instanceof LoginForm){
-					myForm = (LoginForm)entry.getValue();
-					break;
-				}
-			}*/
 			
 			if (result.hasErrors()) {
 				return "login";

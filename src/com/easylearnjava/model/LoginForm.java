@@ -8,6 +8,7 @@ public class LoginForm {
 	@NotEmpty
 	@Size(min = 5, max = 20)
 	private String userName;
+	
 	@NotEmpty
 	@Size(min = 6, max = 15)
 	private String password;
